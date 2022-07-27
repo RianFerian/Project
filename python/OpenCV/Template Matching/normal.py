@@ -153,7 +153,6 @@ if __name__ == "__main__":
 
             if keyboard.is_pressed('2'):
                 found = Put_Away("Sheep", sheeps, max_loc_sheep)
-
             
             if keyboard.is_pressed('1'):
                 found = Put_Away("Pig", pigs, max_loc_pig)
