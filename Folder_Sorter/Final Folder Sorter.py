@@ -11,8 +11,8 @@ base_path = base_path + '\\'
 
 
 # # Read File Name
-# map_file_path = base_path + "File Path.xlsx"
-map_file_path = "D:\\Users\\rian.ferian\\Desktop\\Project\\Folder_Sorter\\File Path.xlsx"
+map_file_path = base_path + "File Path.xlsx"
+# map_file_path = "D:\\Users\\rian.ferian\\Desktop\\Project\\Folder_Sorter\\File Path.xlsx"
 file_name = pd.read_excel(map_file_path)
 Code = file_name["Code"]
 Folder = file_name["Folder"].unique()
