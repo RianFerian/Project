@@ -7,12 +7,9 @@ myVid = cv2.VideoCapture('D:\\Users\\rian.ferian\\Desktop\\Project\\Augmented Re
 
 # Read the video
 success, imgVideo = myVid.read()
-# Take height, width of the target image and resize the video
-_, frame = cap.read()
-hT,wT,_ = frame.shape
+# Take height, weight of the target image and resize the video
+hT,wT,_ = imgTarget.shape
 imgVideo = cv2.resize(imgVideo, (wT, hT))
-imgTarget = cv2.resize(imgTarget, (wT, hT))
-
 
 # Make a key point using orb
 orb = cv2.ORB_create(nfeatures=1000)
