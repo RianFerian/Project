@@ -48,8 +48,15 @@ while True:
         
         # Matrix
         matrix, mask = cv2.findHomography(srcPts, dstPts, cv2.RANSAC, 5)
-        print(matrix)
 
+        pts = np.float32([[0,0], [0,hT], [wT,hT], [wT,0]]).reshape(-1,1,2)
+        dst = cv2.perspectiveTransform(pts,matrix)
+        img2 = cv2.polylines(imgWebcam, [np.int32(dst)], True, (255,0,255), 3)
+
+        # imgWarp = cv2.warpPerspective(imgVideo, matrix, (imgWebcam.shape[1], imgWebcam.shape[0]))
+    
+
+    cv2.imshow('img2', img2)
     # Show image features
     cv2.imshow('Img Features', imgFeatures)
     # Show Image Target
