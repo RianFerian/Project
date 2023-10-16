@@ -16,7 +16,6 @@ hT,wT,_ = frame.shape
 imgVideo = cv2.resize(imgVideo, (wT, hT))
 imgTarget = cv2.resize(imgTarget, (wT, hT))
 
-
 # Make a key point using orb
 orb = cv2.ORB_create(nfeatures=1000)
 # Generate image orb
@@ -28,6 +27,7 @@ while True:
     # Take the video from webcam
     sucess, imgWebcam = cap.read()
     imgAug = imgWebcam.copy()
+    imgWarp = imgWebcam.copy()
 
     # Generate webcam orb
     kp2, des2 = orb.detectAndCompute(imgWebcam, None)
@@ -50,7 +50,7 @@ while True:
     for m,n in matches:
         if m.distance < 0.75 * n.distance:
             good.append(m)
-    print(len(good))
+    # print(len(good))
     imgFeatures = cv2.drawMatches(imgTarget, kp1, imgWebcam, kp2, good, None, flags=2)
 
     # Homograph calculation
@@ -80,10 +80,10 @@ while True:
         imgAug = cv2.bitwise_or(imgWarp, imgAug)
         
     cv2.imshow('masked', imgAug)
-    # cv2.imshow('imgWarp', imgWarp)
+    cv2.imshow('imgWarp', imgWarp)
     # cv2.imshow('img2', img2)
     # # Show image features
-    # cv2.imshow('Img Features', imgFeatures)
+    cv2.imshow('Img Features', imgFeatures)
     # # Show Image Target
     # cv2.imshow('Img Target', imgTarget)
     # # Show the first frame of video
