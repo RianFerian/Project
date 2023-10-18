@@ -1,14 +1,13 @@
 import cv2
 import time
-import numpy as np
+import mediapipe as mp
 
-wCam, hCam = 648, 480
-
+# cd /d d:\users\rian.ferian\appdata\local\programs\python\python311 python.exe -m pip install mediapipe
 
 cap = cv2.VideoCapture(1)
-cap.set(3, wCam)
-cap.set(4, hCam)
-pTime = 8
+
+mpHands = mp.solutions.hands
+hands = mpHands.Hands()
 
 while True:
     success, img = cap.read()
