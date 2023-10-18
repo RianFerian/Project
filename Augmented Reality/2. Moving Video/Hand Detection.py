@@ -8,16 +8,19 @@ cap = cv2.VideoCapture(1)
 
 mpHands = mp.solutions.hands
 hands = mpHands.Hands()
+mpDraw = mp.solutions.drawing_utils
 
 while True:
     success, img = cap.read()
+    imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    results = hands.process(imgRGB)
+    #print(result.multi_hand_landmarks)
 
-    cTime = time.time()
-    fps = 1/(cTime-pTime)
-    pTime = cTime
+    if results.multi_hand_landmarks:
+        for handLms in results.multi_hand_landmarks:
+            mpDraw.draw_landmarks(img, handLms)
 
-    cv2.putText(img,f'FPS:{int(fps)}', (40, 58), cv2.FONT_HERSHEY_COMPLEX,
-                1, (255, 0, 0), 3)
-    
+
+
     cv2.imshow("Img", img)
     cv2.waitKey(1)
