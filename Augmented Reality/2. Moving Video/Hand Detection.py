@@ -35,6 +35,7 @@ while True:
                 # Create the coordinate
                 cx, cy = int(lm.x*w), int(lm.y*h)
                 if id == 8:
+                    # Draw a circle in id 8 = index finger
                     cv2.circle(img, (cx,cy), 15, (255, 0, 255), cv2.FILLED)
 
             # # Draw landmarks
