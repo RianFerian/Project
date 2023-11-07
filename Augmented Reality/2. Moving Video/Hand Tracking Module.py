@@ -42,15 +42,12 @@ class handDetector():
                 # Create the coordinate
                 cx, cy = int(lm.x*w), int(lm.y*h)
                 # print(id, cx, cy)
-                lmList.append(id, cx, cy)
+                lmList.append((id, cx, cy))
                 # if id == 8:
                 # Draw a circle in id 8 = index finger
                 if draw:
                     cv2.circle(img, (cx,cy), 15, (255, 0, 255), cv2.FILLED)
         return lmList
-
-                
-
 
 def main():
     pTime = 0
@@ -61,19 +58,19 @@ def main():
     while True:
         success, img = cap.read()
         img = detector.findHands(img)
+        lmList = detector.findPosition(img)
         if len(lmList) != 0:
-            lmList = detector.findPosition(img)
+            print(lmList[8])
         
-
         cTime = time.time()
         fps = 1/(cTime - pTime)
         pTime = cTime
 
-        cv2.puText(img, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3,
+        cv2.putText(img, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3,
                    (255, 0, 255), 3)
         
         cv2.imshow("Image", img)
-        cv2.waitkey(1)
+        cv2.waitKey(1)
 
 
 if __name__ == "__main__":
