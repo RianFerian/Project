@@ -6,14 +6,16 @@ import mediapipe as mp
 # https://www.youtube.com/watch?v=NZde8Xt78Iw&t=1413s
 
 class handDetector():
-    def __init__(self, mode=False, maxHands=2, detectionCon=0.5, trackCon=0.5):
+    def __init__(self, mode=False, maxHands=2, model_complexity=1, detectionCon=0.5, trackCon=0.5):
+
         self.mode = mode
         self.maxHands = maxHands
+        self.model_coplexity = model_complexity
         self.detectionCon = detectionCon
         self.trackCon = trackCon
 
         self.mpHands = mp.solutions.hands
-        self.hands = self.mpHands.Hands(self.mode, self.maxHands, self.detectionCon, self.trackCon)
+        self.hands = self.mpHands.Hands(self.mode, self.maxHands, self.model_coplexity, self.detectionCon, self.trackCon)
         self.mpDraw = mp.solutions.drawing_utils
 
     def findHands(self, img, draw=True):
@@ -29,7 +31,7 @@ class handDetector():
                    self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
         return img
 
-    def findPosition(self, img, handNo=8, draw=True):
+    def findPosition(self, img, handNo=0, draw=True):
         # Visualize every hand landmarks
 
         lmList = []
@@ -46,19 +48,21 @@ class handDetector():
                 # if id == 8:
                 # Draw a circle in id 8 = index finger
                 if draw:
-                    cv2.circle(img, (cx,cy), 15, (255, 0, 255), cv2.FILLED)
+                    cv2.circle(img, (cx,cy), 5, (255, 0, 255), cv2.FILLED)
         return lmList
 
 def main():
     pTime = 0
     cTime = 0
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     detector = handDetector()
 
     while True:
         success, img = cap.read()
         img = detector.findHands(img)
+        # Output
         lmList = detector.findPosition(img)
+        # ID and tracker
         if len(lmList) != 0:
             print(lmList[8])
         
