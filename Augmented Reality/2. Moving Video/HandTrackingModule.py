@@ -47,7 +47,7 @@ class handDetector():
                 lmList.append((id, cx, cy))
                 # if id == 8:
                 # Draw a circle in id 8 = index finger
-                if draw:
+                if draw and id==8 or id == 4 :
                     cv2.circle(img, (cx,cy), 5, (255, 0, 255), cv2.FILLED)
         return lmList
 
