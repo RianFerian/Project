@@ -49,6 +49,8 @@ class handDetector():
                 # Draw a circle in id 8 = index finger                
                 cv2.circle(img, (cx,cy), 5, (255, 0, 255), cv2.FILLED)
         return lmList
+    
+    
 
 def main():
     pTime = 0

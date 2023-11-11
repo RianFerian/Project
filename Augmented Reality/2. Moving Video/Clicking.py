@@ -2,6 +2,7 @@ import cv2
 import time
 import mediapipe as mp
 import HandTrackingModule as htm
+import math
 
 pTime = 0
 cTime = 0
@@ -29,7 +30,11 @@ while True:
         cv2.line(img, (x1,y1), (x2,y2), (255,0,255), 3)
         cv2.circle(img, (cx,cy), 10, (255,0,255), cv2.FILLED)
         
+        length = math.hypot(x2 - x1, y2 - y1)
+        print(length)
 
+        if length < 50:
+            cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
 
 
     cTime = time.time()
