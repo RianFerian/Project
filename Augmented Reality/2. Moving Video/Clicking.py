@@ -3,6 +3,7 @@ import time
 import mediapipe as mp
 import HandTrackingModule as htm
 import math
+import pyautogui
 
 pTime = 0
 cTime = 0
@@ -11,12 +12,12 @@ detector = htm.handDetector()
 
 while True:
     success, img = cap.read()
-    img = detector.findHands(img)
+    img = detector.findHands(img, draw=True)
     # Output
-    lmList = detector.findPosition(img, draw=False)
+    lmList = detector.findPosition(img)
     # ID and tracker
     if len(lmList) != 0:
-        print(lmList[4], lmList[8])
+        # print(lmList[4], lmList[8])
 
         # Each finger position 4 thumb 8 index
         x1, y1 = lmList[4][1], lmList[4][2]
@@ -30,11 +31,24 @@ while True:
         cv2.line(img, (x1,y1), (x2,y2), (255,0,255), 3)
         cv2.circle(img, (cx,cy), 10, (255,0,255), cv2.FILLED)
         
+        # Length for x and y
         length = math.hypot(x2 - x1, y2 - y1)
-        print(length)
+        # print(length)
 
-        if length < 50:
-            cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
+        # Is the fingers was up?
+        fingersUp = detector.fingersUp(lmList)
+
+        # if the fingers was up
+        if fingersUp:
+
+            # Get the position of the mouse
+            mouseX, mouseY = pyautogui.position()
+            print(mouseX,mouseY)
+
+
+            # if the length was less than 40 show a green circle
+            if length < 40:
+                cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
 
 
     cTime = time.time()
