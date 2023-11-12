@@ -31,7 +31,7 @@ class handDetector():
                    self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
         return img
 
-    def findPosition(self, img, handNo=0, draw=True):
+    def findPosition(self, img, handNo=0):
         # Visualize every hand landmarks
 
         lmList = []
@@ -49,6 +49,12 @@ class handDetector():
                 # Draw a circle in id 8 = index finger                
                 cv2.circle(img, (cx,cy), 5, (255, 0, 255), cv2.FILLED)
         return lmList
+
+    def fingersUp(self, lmList):
+        if lmList[8][1] < lmList[7][1]:
+            return False
+        else :
+            return True
     
     
 
@@ -63,9 +69,12 @@ def main():
         img = detector.findHands(img)
         # Output
         lmList = detector.findPosition(img)
-        # ID and tracker
+        # # ID and tracker
+        # if len(lmList) != 0:
+        #     print(lmList[8])
+
         if len(lmList) != 0:
-            print(lmList[8])
+            print(detector.fingersUp(lmList))
         
         cTime = time.time()
         fps = 1/(cTime - pTime)
