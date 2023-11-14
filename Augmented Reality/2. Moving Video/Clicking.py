@@ -10,6 +10,9 @@ cTime = 0
 cap = cv2.VideoCapture(0)
 detector = htm.handDetector()
 
+# Index finger location
+IndexFinger = [0, 0]
+
 while True:
     success, img = cap.read()
     img = detector.findHands(img, draw=True)
@@ -43,10 +46,16 @@ while True:
 
             # Get the position of the mouse
             mouseX, mouseY = pyautogui.position()
-            print(mouseX,mouseY)
+            
+            # Index finger location - new index finger location
+            if len(IndexFinger>0):
+                movementX, movementY = IndexFinger[1] - lmList[4][1], IndexFinger[2] - lmList[4][2]
+
+            # Update index finger location            
+            IndexFinger[1], IndexFinger[2] = lmList[4][1], lmList[4][2]
 
 
-            # if the length was less than 40 show a green circle
+            # if the length thumb and index was less than 40 show a green circle
             if length < 40:
                 cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
 
