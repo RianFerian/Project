@@ -41,18 +41,20 @@ while True:
         # Is the fingers was up?
         fingersUp = detector.fingersUp(lmList)
 
+        # Get the position of the mouse
+        mouseX, mouseY = pyautogui.position()
+        print(mouseX, mouseY)
+
         # if the fingers was up
         if fingersUp:
 
-            # Get the position of the mouse
-            mouseX, mouseY = pyautogui.position()
-            
             # Index finger location - new index finger location
-            if len(IndexFinger>0):
-                movementX, movementY = IndexFinger[1] - lmList[4][1], IndexFinger[2] - lmList[4][2]
+            if len(IndexFinger)>0:
+                movementX, movementY = IndexFinger[0] - lmList[4][1], IndexFinger[1] - lmList[4][2]
+                print(movementX, movementY)
 
             # Update index finger location            
-            IndexFinger[1], IndexFinger[2] = lmList[4][1], lmList[4][2]
+            IndexFinger[0], IndexFinger[1] = lmList[4][1], lmList[4][2]
 
 
             # if the length thumb and index was less than 40 show a green circle
