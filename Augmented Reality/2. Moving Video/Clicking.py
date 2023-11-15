@@ -53,6 +53,8 @@ while True:
                 movementX, movementY = IndexFinger[0] - lmList[4][1], IndexFinger[1] - lmList[4][2]
                 print(movementX, movementY)
 
+                pyautogui.move(-(movementX*5), -(movementY*5))
+
             # Update index finger location            
             IndexFinger[0], IndexFinger[1] = lmList[4][1], lmList[4][2]
 
