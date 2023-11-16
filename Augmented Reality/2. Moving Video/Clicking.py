@@ -25,6 +25,9 @@ while True:
         # Each finger position 4 thumb 8 index
         x1, y1 = lmList[4][1], lmList[4][2]
         x2, y2 = lmList[8][1], lmList[8][2]
+        # Index and middle finger
+        x3, y3 = lmList[8][1], lmList[12][2]
+        
         # Middle position
         cx, cy = (x1+x2)//2, (y1+y2)//2
 
@@ -34,9 +37,13 @@ while True:
         cv2.line(img, (x1,y1), (x2,y2), (255,0,255), 3)
         cv2.circle(img, (cx,cy), 10, (255,0,255), cv2.FILLED)
         
-        # Length for x and y
+        # Length for thumb and index finger
         length_thumb_index = math.hypot(x2 - x1, y2 - y1)
         # print(length)
+
+        # Length for index and middle finger
+        length_index_middle = math.hypot(x3-x2, y3-y2)
+        print(length_index_middle)
 
         # Is the fingers was up?
         fingersUp = detector.fingersUp(lmList)
@@ -47,25 +54,25 @@ while True:
 
         # if the fingers was up
         if fingersUp:
+            if length_index_middle < 10:
+                # Index finger location - new index finger location
+                if len(IndexFinger)>0:
+                    movementX, movementY = IndexFinger[0] - lmList[4][1], IndexFinger[1] - lmList[4][2]
+                    # print(movementX, movementY)
 
-            # Index finger location - new index finger location
-            if len(IndexFinger)>0:
-                movementX, movementY = IndexFinger[0] - lmList[4][1], IndexFinger[1] - lmList[4][2]
-                print(movementX, movementY)
-
-                try:
-                    pyautogui.move((movementX * 1.5), (movementY * -1.5))
-                except pyautogui.FailSafeException as e:
-                    print(f"Fail-safe triggered: {e}")
-                
+                    try:
+                        pyautogui.move((movementX * 2), (movementY * -2))
+                    except pyautogui.FailSafeException as e:
+                        print(f"Fail-safe triggered: {e}")
+            
+            # # if the length thumb and index was less than 40 show a green circle
+            # if length_thumb_index < 40:
+            #     cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
+            
             # Update index finger location            
             IndexFinger[0], IndexFinger[1] = lmList[4][1], lmList[4][2]
-
-
-            # if the length thumb and index was less than 40 show a green circle
-            if length_thumb_index < 40:
-                cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
-
+                
+        
 
     cTime = time.time()
     fps = 1/(cTime - pTime)
