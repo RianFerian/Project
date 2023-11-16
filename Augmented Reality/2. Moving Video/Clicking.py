@@ -35,7 +35,7 @@ while True:
         cv2.circle(img, (cx,cy), 10, (255,0,255), cv2.FILLED)
         
         # Length for x and y
-        length = math.hypot(x2 - x1, y2 - y1)
+        length_thumb_index = math.hypot(x2 - x1, y2 - y1)
         # print(length)
 
         # Is the fingers was up?
@@ -53,14 +53,17 @@ while True:
                 movementX, movementY = IndexFinger[0] - lmList[4][1], IndexFinger[1] - lmList[4][2]
                 print(movementX, movementY)
 
-                pyautogui.move(-(movementX*5), -(movementY*5))
-
+                try:
+                    pyautogui.move((movementX * 1.5), (movementY * -1.5))
+                except pyautogui.FailSafeException as e:
+                    print(f"Fail-safe triggered: {e}")
+                
             # Update index finger location            
             IndexFinger[0], IndexFinger[1] = lmList[4][1], lmList[4][2]
 
 
             # if the length thumb and index was less than 40 show a green circle
-            if length < 40:
+            if length_thumb_index < 40:
                 cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
 
 
@@ -68,7 +71,9 @@ while True:
     fps = 1/(cTime - pTime)
     pTime = cTime
 
+    # Flip the frame horizontally
+    img = cv2.flip(img, 1)  # 1 denotes horizontal flip
     cv2.putText(img, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
-            
+    
     cv2.imshow("Image", img)
     cv2.waitKey(1)
