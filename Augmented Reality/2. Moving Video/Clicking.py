@@ -71,7 +71,9 @@ while True:
             
             # Update index finger location            
             IndexFinger[0], IndexFinger[1] = lmList[4][1], lmList[4][2]
-                
+            
+            if length_thumb_index<40:
+                pyautogui.click()
         
 
     cTime = time.time()
