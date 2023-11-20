@@ -21,3 +21,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+1
+6
+6
+ngogog
+oaoooo
+gondog
+oooaoo
+gogong
+gogona
+nana
