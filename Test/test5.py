@@ -4,26 +4,30 @@ def find_words(matrix, target):
 
     value = 0
 
-    # Check horizontally
+    # # # Check horizontally
     for row in matrix:
         start_index = 0
         for i in range(len(row)):
             string_representation = ''.join(row)
             start_index = string_representation.find(target, start_index)
+            if start_index == -1:
+                break
             if start_index != -1:
-                value += string_representation.count(target, i, len(row))
+                value += string_representation.count(target, start_index, start_index+len(target))
                 start_index += 1
 
 
-    # # Check horizontally from left to right
+    # # # Check horizontally from left to right
     for row in reversed(matrix):
         row = row[::-1]
         start_index = 0
         for i in range(len(row)):
             string_representation = ''.join(row)
             start_index = string_representation.find(target, start_index)
+            if start_index == -1:
+                break
             if start_index != -1:
-                value += string_representation.count(target, i, len(row))
+                value += string_representation.count(target, start_index, start_index+len(target))
                 start_index += 1
 
     # # Check vertically
@@ -33,14 +37,16 @@ def find_words(matrix, target):
 
         # Di loop untuk masing" huruf
         for i in range(len(words)):
-            # Kalau ketemu, ambil indexnya
+            # Cari index yang sama
             start_index = words.find(target, start_index)
-
+            if start_index == -1:
+                break
+            # Ambil index pertama kemudian next
             if start_index != -1:
-                value += words.count(target, start_index, len(words))
+                value += words.count(target, start_index, start_index+len(target))
                 start_index += 1
 
-    # Check vertically from bottom to top
+    # # Check vertically from bottom to top
     for col in range(cols):
         words = ''.join(matrix[row][col] for row in range(rows))
         words = words[::-1]
@@ -48,58 +54,66 @@ def find_words(matrix, target):
 
         # Di loop untuk masing" huruf
         for i in range(len(words)):
-            # Kalau ketemu, ambil indexnya
+            # Cari index yang sama
             start_index = words.find(target, start_index)
-
+            if start_index == -1:
+                break
+            # Ambil index pertama kemudian next
             if start_index != -1:
-                value += words.count(target, start_index, len(words))
-    #             start_index += 1
+                value += words.count(target, start_index, start_index+len(target))
+                start_index += 1
 
-    # # # Check diagonally from top-left to bottom-right
+    # # # # Check diagonally from top-left to bottom-right
     for k in range(-rows + 1, cols):
         words = ''.join(matrix[row][row + k] for row in range(max(0, -k), min(rows, cols - k)))
         start_index = 0
 
         # Di loop untuk masing" huruf
         for i in range(len(words)):
-            # Kalau ketemu, ambil indexnya
+            # Cari index yang sama
             start_index = words.find(target, start_index)
-
+            if start_index == -1:
+                break
+            # Ambil index pertama kemudian next
             if start_index != -1:
-                i = start_index
-                value += words.count(target, start_index, len(words))
+                value += words.count(target, start_index, start_index+len(target))
                 start_index += 1
 
+
         
-    # # Check diagonally from bottom-left to top-right
-    for k in range(rows + cols - 1):
+    # # # Check diagonally from bottom-left to top-right
+    for k in range(-rows + 1, cols):
         words = ''.join(matrix[row][row + k] for row in range(max(0, -k), min(rows, cols - k)))
         words = words[::-1]
         start_index = 0
 
+
         # Di loop untuk masing" huruf
         for i in range(len(words)):
-            # Kalau ketemu, ambil indexnya
+            # Cari index yang sama
             start_index = words.find(target, start_index)
-
+            if start_index == -1:
+                break
+            # Ambil index pertama kemudian next
             if start_index != -1:
-                i = start_index
-                value += words.count(target, start_index, len(words))
+                value += words.count(target, start_index, start_index+len(target))
                 start_index += 1
 
-
-    # Check diagonally from top-right to bottom-left
+    # # # Check diagonally from top-right to bottom-left
     for k in range(rows + cols - 1):
         words = ''.join(matrix[row][k - row] for row in range(max(0, k - cols + 1), min(rows, k + 1)))
         start_index = 0
 
+
         # Di loop untuk masing" huruf
         for i in range(len(words)):
-            # Kalau ketemu, ambil indexnya
+            # Cari index yang sama
             start_index = words.find(target, start_index)
-
+            if start_index == -1:
+                break
+            # Ambil index pertama kemudian next
             if start_index != -1:
-                value += words.count(target, start_index, len(words))
+                value += words.count(target, start_index, start_index+len(target))
                 start_index += 1
 
 
@@ -111,11 +125,13 @@ def find_words(matrix, target):
 
         # Di loop untuk masing" huruf
         for i in range(len(words)):
-            # Kalau ketemu, ambil indexnya
+            # Cari index yang sama
             start_index = words.find(target, start_index)
-
+            if start_index == -1:
+                break
+            # Ambil index pertama kemudian next
             if start_index != -1:
-                value += words.count(target, start_index, len(words))
+                value += words.count(target, start_index, start_index+len(target))
                 start_index += 1
 
     return value
@@ -146,8 +162,8 @@ def main():
                 row.append(j)
             matrix.append(row)
 
-        for i in range(N):
-            print(matrix[i])
+        # for i in range(N):
+        #     print(matrix[i])
 
         # Now, 'matrix' contains the final matrix formed by N input strings
         # Print the matrix for verification
