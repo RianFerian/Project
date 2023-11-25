@@ -1,3 +1,5 @@
+# FINAL
+
 def dfs(char, start_row, start_col, kingdom_map):
     stack = [(start_row, start_col)]
     clean_area = 0
