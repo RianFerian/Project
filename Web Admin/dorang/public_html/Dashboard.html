@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
 
     <!-- Bootstrap + Dorang main styles -->
-	<link rel="stylesheet" href="assets/css/dorang.css">
+    <link rel="stylesheet" href="assets/css/dorang.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+
 
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home" class="dark-theme">
@@ -27,8 +30,37 @@
     <div class="container page-container">
         <div class="row">
             <div class="col md-12">
-                <h2>Employee List <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="Mymodal">
-                    Add Student Data </button></h2>               
+                <h2>Employee List 
+                    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="Mymodal">
+                    Add Student Data 
+                    </button>
+                </h2>
+
+                <table class="table table-striped">
+                    <tr>
+                        <th>Serial</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+
+                    <tr>
+                        <td>01</td>
+                        <td>Rian</td>
+                        <td>rian@gmail.com</td>
+                        <td>08577</td>
+                        
+                        <td>
+                            <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit">Edit</a>
+                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure?')"  data-target="#modaledit">Delete</a>
+                            
+                        </td>
+                    </tr>
+
+
+                </table>
+
             </div>
         </div>
     </div>
