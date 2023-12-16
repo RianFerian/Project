@@ -6761,3 +6761,8 @@ button.close {
   text-align: left;
   color: #fff;
 }
+
+#mymodal h4{
+  text-align: left;
+  color: #333;
+}

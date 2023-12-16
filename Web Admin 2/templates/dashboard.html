@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with Dorang landing page.">
+    <meta name="author" content="Devcrud">
+    <title>CRUD Demo</title>
+    <!-- font icons -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/themify-icons/css/themify-icons.css') }}">
+
+    <!-- Bootstrap + Dorang main styles -->
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/dorang.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/bootstrap.css')}}">
+
+
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home" class="dark-theme">
+    
+    <!-- page navbar -->
+    <nav class="page-navbar" data-spy="affix" data-offset-top="10">
+        <ul class="nav-navbar container">
+            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="Dashboard.html" class="nav-link">Dashboard</a></li>
+        </ul>
+    </nav><!-- end of page navbar -->
+
+    <div class="container page-container"></div>
+    <div class="container page-container">
+        <div class="row">
+            <div class="col md-12">
+                <h2>Employee List 
+                    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#mymodal">
+                    Add Student Data 
+                    </button>
+                </h2>
+
+                <table class="table table-striped">
+                    <tr>
+                        <th>Serial</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+
+                    <tr>
+                        <td>01</td>
+                        <td>Rian</td>
+                        <td>rian@gmail.com</td>
+                        <td>08577</td>
+                        
+                        <td>
+                            <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit">Edit</a>
+                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure?')"  data-target="#modaledit">Delete</a>
+                            
+                        </td>
+                    </tr>
+
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Student -->
+    <div id="mymodal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                    <h4 class="modal-title">Update Information</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+               </div>
+    
+               <div class="modal-body">
+                  <form action="" method="POST">
+                     <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" name="name" required="1">
+                     </div>
+    
+                     <div class="form-group">
+                        <label>Email:</label>
+                        <input type="text" class="form-control" name="email" required="1">
+                     </div>
+    
+                     <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="text" class="form-control" name="phone" required="1">
+                     </div>
+    
+                     <div class="form-group">
+                        <button class="btn btn-primary" type="sbumit">Update</button>
+                     </div>
+                     
+                  </form>
+               </div>
+    
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               </div>
+    
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Dorang js -->
+    <script type="text/javascript" src="{{url_for('static', filename = '/js/jquery-3.2.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename = '/js/bootstrap.min.js')}}"></script>
+
+
+</body>
+</html>

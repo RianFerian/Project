@@ -7,11 +7,11 @@
     <meta name="author" content="Devcrud">
     <title>CRUD Demo</title>
     <!-- font icons -->
-    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/themify-icons/css/themify-icons.css') }}">
 
     <!-- Bootstrap + Dorang main styles -->
-	<link rel="stylesheet" href="assets/css/dorang.css">
-
+	<link rel="stylesheet" href="{{url_for('static', filename = 'css/dorang.css')}}">
+    
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home" class="dark-theme">
     
@@ -19,7 +19,7 @@
     <nav class="page-navbar" data-spy="affix" data-offset-top="10">
         <ul class="nav-navbar container">
             <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="Dashboard.html" class="nav-link">Dashboard</a></li>
+            <li class="nav-item"><a href="{{url_for('dashboard') }}" class="nav-link">Dashboard</a></li>
         </ul>
     </nav><!-- end of page navbar -->
 
@@ -30,20 +30,20 @@
             <h1 class="header-title">Pleasure in the job puts perfection in the work</h1>
             <p class="header-subtitle">~ Aristotle ~</p>
 
-            <a href="Dashboard.html" class="nav-link"><button class="btn btn-theme-color">Continue</button>
+            <a href="{{url_for('dashboard') }}" class="nav-link"><button class="btn btn-theme-color">Continue</button>
             </a>
         </div>
     </header><!-- end of page header -->
 
     <!-- core  -->
-    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
-    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
-
+    <script type="text/javascript" src="{{url_for('static', filename = 'vendors/jquery/jquery-3.4.1.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename = 'vendors/bootstrap/bootstrap.bundle.js')}}"></script>
+    
     <!-- bootstrap affix -->
-    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+    <script type="text/javascript" src="{{url_for('static', filename = 'vendors/bootstrap/bootstrap.affix.js')}}"></script>
 
     <!-- Dorang js -->
-    <script src="assets/js/dorang.js"></script>
-
+    <script type="text/javascript" src="{{url_for('static', filename = 'js/dorang.js')}}"></script>
+    
 </body>
 </html>
