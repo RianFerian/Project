@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, g, flash
 import sqlite3
 import os
 
+
 app = Flask(__name__)
 app.secret_key = "flash message"
 
@@ -28,12 +29,15 @@ def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
 
+# Take the index.html template
 @app.route('/')
 def Index():
     return render_template('index.html')
 
+# Take the dashboard.html template
 @app.route('/dashboard')
 def dashboard():
+    # Showing all data
     db = get_db()
     cursor = db.cursor()
     cursor.execute("SELECT * FROM employee")
@@ -41,10 +45,11 @@ def dashboard():
 
     return render_template('dashboard.html', employees = data)
 
+# Insert for a new data
 @app.route('/insert', methods = ['POST'])
 def insert():
 
-
+    # Post the form data to database
     if request.method == "POST":
         flash("Data Inserted Success")
         name = request.form['name']
@@ -58,6 +63,7 @@ def insert():
 
         return redirect(url_for('dashboard'))
 
+# Update/edit data
 @app.route('/update', methods = ['POST', 'GET'])
 def update():
     if request.method == 'POST':
@@ -77,8 +83,10 @@ def update():
         db.commit()
         return redirect(url_for('dashboard'))
 
+# Delete data
 @app.route('/delete/<string:id_data>', methods=['POST', 'GET'])
 def delete(id_data):
+    # connect to database
     db = get_db()
     cursor = db.cursor()
     cursor.execute("DELETE FROM employee WHERE id =?", (id_data))
