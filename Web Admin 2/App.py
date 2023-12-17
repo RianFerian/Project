@@ -58,6 +58,24 @@ def insert():
 
         return redirect(url_for('dashboard'))
 
+@app.route('/update', methods = ['POST', 'GET'])
+def update():
+    if request.method == 'POST':
+        id_data = request.form['id']
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute("""
+        UPDATE employee
+        SET name =?, email=?, phone=?
+        WHERE id=?
+        """, (name, email, phone, id_data))
+        flash("Data Updated Sucessfully")
+        db.commit()
+        return redirect(url_for('dashboard'))
 
 
 

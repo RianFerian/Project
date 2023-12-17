@@ -6764,3 +6764,8 @@ button.close {
 .alert-success {
   text-align: left;
 }
+
+.form-group label {
+  position: left;
+  float: left;
+}
