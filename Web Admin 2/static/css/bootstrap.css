@@ -2316,7 +2316,7 @@ th {
 .table-bordered > thead > tr > td {
   border-bottom-width: 2px;
 }
-.table-striped > tbody > tr:nth-of-type(odd) {
+.table-striped > tbody > tr:first-of-type {
   background-color: #f9f9f9;
 }
 .table-hover > tbody > tr:hover {
@@ -6759,4 +6759,8 @@ button.close {
 .modal-header h4{
   text-align: left;
   color: #333;
+}
+
+.alert-success {
+  text-align: left;
 }

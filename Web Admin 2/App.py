@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, g
+from flask import Flask, render_template, request, redirect, url_for, g, flash
 import sqlite3
 import os
 
 app = Flask(__name__)
+app.secret_key = "flash message"
 
 # Get the directory containing the currently executing Python script
 folder_path = os.path.dirname(os.path.abspath(__file__))
@@ -33,18 +34,23 @@ def Index():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM employee")
+    data = cursor.fetchall()
+
+    return render_template('dashboard.html', employees = data)
 
 @app.route('/insert', methods = ['POST'])
 def insert():
-    print("Reached the /insert route")
+
 
     if request.method == "POST":
+        flash("Data Inserted Success")
         name = request.form['name']
         email = request.form['email']
         phone = request.form['phone']
-        print(f"Received form data: {name}, {email}, {phone}")
-
+        
         db = get_db()
         cursor = db.cursor()
         cursor.execute("INSERT INTO employee (name, email, phone) VALUES (?, ?, ?)", (name, email, phone))

@@ -32,9 +32,33 @@
             <div class="col md-12">
                 <h2>Employee List 
                     <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#mymodal">
-                    Add Student Data 
+                    Add Employee Data 
                     </button>
                 </h2>
+
+                <!-- Allert Messages -->
+    {%with messages = get_flashed_messages()%}
+
+    {%if messages%}
+
+    {% for message in messages %}
+
+    <div class="alert alert-success alert-dismissable" role="alert">
+
+     <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+
+         <span aria-hidden="true">&times;</span>
+
+     </button>
+        {{message}}
+
+
+    </div>
+
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+                <!-- Allert Messages Ends-->
 
                 <table class="table table-striped">
                     <tr>
@@ -45,18 +69,23 @@
                         <th>Action</th>
                     </tr>
 
+                    {% for row in employees %}
+
+
                     <tr>
-                        <td>01</td>
-                        <td>Rian</td>
-                        <td>rian@gmail.com</td>
-                        <td>08577</td>
+                        <td>{{row.0}}</td>
+                        <td>{{row.1}}</td>
+                        <td>{{row.2}}</td>
+                        <td>{{row.3}}</td>
                         
                         <td>
-                            <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit">Edit</a>
-                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure?')">Delete</a>
+                            <a href="/update/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
+                            <a href="/delete/{{row.0}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure?')">Delete</a>
                             
                         </td>
                     </tr>
+
+                    {% endfor %}
 
 
                 </table>
