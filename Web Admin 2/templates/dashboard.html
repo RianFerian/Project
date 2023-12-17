@@ -21,8 +21,8 @@
     <!-- page navbar -->
     <nav class="page-navbar" data-spy="affix" data-offset-top="10">
         <ul class="nav-navbar container">
-            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="Dashboard.html" class="nav-link">Dashboard</a></li>
+            <li class="nav-item"><a href="{{ url_for('Index') }}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a></li>
         </ul>
     </nav><!-- end of page navbar -->
 
@@ -75,7 +75,7 @@
                </div>
     
                <div class="modal-body">
-                  <form action="" method="POST">
+                <form action="{{ url_for('insert') }}" method="POST">
                      <div class="form-group">
                         <label>Name:</label>
                         <input type="text" class="form-control" name="name" required="1">
@@ -94,7 +94,6 @@
                      <div class="form-group">
                         <button class="btn btn-primary" type="submit">Update</button>
                      </div>
-                     
                   </form>
                </div>
     
