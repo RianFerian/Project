@@ -77,7 +77,14 @@ def update():
         db.commit()
         return redirect(url_for('dashboard'))
 
-
+@app.route('/delete/<string:id_data>', methods=['POST', 'GET'])
+def delete(id_data):
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("DELETE FROM employee WHERE id =?", (id_data))
+    flash("Data Delete Sucessfully")
+    db.commit()
+    return redirect(url_for('dashboard'))
 
 if __name__ == "__main__":
     app.run(debug=True)
