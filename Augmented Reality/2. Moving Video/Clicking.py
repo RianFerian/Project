@@ -38,14 +38,14 @@ while True:
         # # Middle position thumb and pinky MCP
         cx, cy = (x1+x4)//2, (y1+y4)//2
 
-        # Draw circle and line
+        # # Draw circle and line
         cv2.circle(img, (x1,y1), 10, (255,0,255), cv2.FILLED)
         cv2.circle(img, (x2,y2), 10, (255,0,255), cv2.FILLED)
-        cv2.line(img, (x1,y1), (x2,y2), (255,0,255), 3)
+        cv2.line(img, (x1,y1), (x4,y4), (255,0,255), 3)
         cv2.circle(img, (cx,cy), 10, (255,0,255), cv2.FILLED)
         
         # Length for thumb and Pinky MCP 
-        length_thumb_index = math.hypot(x4 - x1, y4 - y1)
+        length_thumb_pinky = math.hypot(x4 - x1, y4 - y1)
         # print(length)
 
         # Length for index and middle finger
@@ -68,7 +68,7 @@ while True:
                     # print(movementX, movementY)
 
                     try:
-                        pyautogui.move((movementX * 2), (movementY * -2))
+                        pyautogui.move((movementX * 3), (movementY * -3))
                     except pyautogui.FailSafeException as e:
                         print(f"Fail-safe triggered: {e}")
             
@@ -79,8 +79,11 @@ while True:
             # Update index finger location            
             IndexFinger[0], IndexFinger[1] = lmList[4][1], lmList[4][2]
             
-            if length_thumb_index<40:
-                pyautogui.click()
+            if length_thumb_pinky<40:
+                try: 
+                    pyautogui.click()
+                except pyautogui.FailSafeException as e:
+                        print(f"Fail-safe triggered: {e}")
         
 
     cTime = time.time()
