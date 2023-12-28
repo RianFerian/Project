@@ -7,7 +7,10 @@ import pyautogui
 
 pTime = 0
 cTime = 0
+
+# Take the video
 cap = cv2.VideoCapture(0)
+# Load hand tracking Module
 detector = htm.handDetector()
 
 # Index finger location
@@ -22,14 +25,18 @@ while True:
     if len(lmList) != 0:
         # print(lmList[4], lmList[8])
 
-        # Each finger position 4 thumb 8 index
+        # Position for thumb finger 
         x1, y1 = lmList[4][1], lmList[4][2]
+        # Index finger position
         x2, y2 = lmList[8][1], lmList[8][2]
-        # Index and middle finger
-        x3, y3 = lmList[8][1], lmList[12][2]
-        
-        # Middle position
-        cx, cy = (x1+x2)//2, (y1+y2)//2
+        # middle finger postition
+        x3, y3 = lmList[12][1], lmList[12][2]
+        # Pinky MCP finger position
+        x4, y4 = lmList[17][1], lmList[17][2]
+
+
+        # # Middle position thumb and pinky MCP
+        cx, cy = (x1+x4)//2, (y1+y4)//2
 
         # Draw circle and line
         cv2.circle(img, (x1,y1), 10, (255,0,255), cv2.FILLED)
@@ -37,8 +44,8 @@ while True:
         cv2.line(img, (x1,y1), (x2,y2), (255,0,255), 3)
         cv2.circle(img, (cx,cy), 10, (255,0,255), cv2.FILLED)
         
-        # Length for thumb and index finger
-        length_thumb_index = math.hypot(x2 - x1, y2 - y1)
+        # Length for thumb and Pinky MCP 
+        length_thumb_index = math.hypot(x4 - x1, y4 - y1)
         # print(length)
 
         # Length for index and middle finger

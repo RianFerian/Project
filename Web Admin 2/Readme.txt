@@ -1,7 +1,9 @@
 Weekend Project: Employee Management App (Web base).
 
 How to run:
-- execute App.py.
+- execute App.py and don't close it.
+- Take the path and run it in the browser.
+
 
 How it work:
 - Landing Page based on HTML.
