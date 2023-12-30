@@ -42,10 +42,10 @@ while True:
         cx, cy = (x1+x4)//2, (y1+y4)//2
 
         # # Draw circle and line
-        cv2.circle(img, (x1,y1), 10, (255,0,255), cv2.FILLED)
-        cv2.circle(img, (x2,y2), 10, (255,0,255), cv2.FILLED)
-        cv2.line(img, (x1,y1), (x4,y4), (255,0,255), 3)
-        cv2.circle(img, (cx,cy), 10, (255,0,255), cv2.FILLED)
+        # cv2.circle(img, (x1,y1), 10, (255,0,255), cv2.FILLED)
+        # cv2.circle(img, (x2,y2), 10, (255,0,255), cv2.FILLED)
+        # cv2.line(img, (x1,y1), (x4,y4), (255,0,255), 3)
+        # cv2.circle(img, (cx,cy), 10, (255,0,255), cv2.FILLED)
         
         # Length for thumb and Pinky MCP 
         length_thumb_pinky = math.hypot(x4 - x1, y4 - y1)
