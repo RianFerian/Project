@@ -53,14 +53,14 @@ while True:
 
         # Length for index and middle finger
         length_index_middle = math.hypot(x3-x2, y3-y2)
-        print(length_index_middle)
+        # print(length_index_middle)
 
         # Is the fingers was up?
         fingersUp = detector.fingersUp(lmList)
 
         # Get the position of the mouse
         mouseX, mouseY = pyautogui.position()
-        print(mouseX, mouseY)
+        # print(mouseX, mouseY)
 
         # if the fingers was up
         if fingersUp:
@@ -86,17 +86,20 @@ while True:
             if length_thumb_pinky<40 and Mouse_Clicked == False:
                 try: 
                     pyautogui.mouseDown()
-                    Mouse_Clicked == True
+                    print("Mouse Down")
+                    Mouse_Clicked = True
+                    print(Mouse_Clicked)
                 except pyautogui.FailSafeException as e:
                     print(f"Fail-safe triggered: {e}")
-            if length_thumb_pinky<40 and Mouse_Clicked == True:
+            if length_thumb_pinky>40 and Mouse_Clicked == True:
                 try:
                     pyautogui.mouseUp()
-                    Mouse_Clicked == False
+                    print("Mouse Up")
+                    Mouse_Clicked = False
+                    print(Mouse_Clicked)
                 except pyautogui.FailSafeException as e:
                         print(f"Fail-safe triggered: {e}")
 
-        # Test
 
     cTime = time.time()
     fps = 1/(cTime - pTime)
