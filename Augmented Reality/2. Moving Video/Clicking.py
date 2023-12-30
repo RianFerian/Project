@@ -78,6 +78,7 @@ while True:
             # # if the length thumb and index was less than 40 show a green circle
             # if length_thumb_index < 40:
             #     cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)
+                        
             
             # Update index finger location            
             IndexFinger[0], IndexFinger[1] = x2, y2
@@ -95,7 +96,7 @@ while True:
                 except pyautogui.FailSafeException as e:
                         print(f"Fail-safe triggered: {e}")
 
-        
+        # Test
 
     cTime = time.time()
     fps = 1/(cTime - pTime)
