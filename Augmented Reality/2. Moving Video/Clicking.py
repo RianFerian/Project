@@ -4,12 +4,34 @@ import mediapipe as mp
 import HandTrackingModule as htm
 import math
 import pyautogui
+import numpy as np
+# import autopy
+
+# cd /d d:\users\rian.ferian\appdata\local\programs\python\python311 python.exe -m pip install mediapipe
+# cd /d d:\users\rian.ferian\appdata\local\programs\python\python311 python.exe -m pip install autopy
+# cd /d d:\users\rian.ferian\appdata\local\programs\python\python311 python.exe -m pip install autopy --no-build-isolation
+
+
+
+
+
 
 pTime = 0
 cTime = 0
 
+# Smoothening
+wCam, hCam = 640, 480
+frameR = 100
+smoothening = 7
+plocX, plocY = 0, 0
+clocX, clocY = 0, 0
+wScr, hScr = pyautogui.size()
+print(wScr, hScr)
+
 # Take the video
 cap = cv2.VideoCapture(0)
+cap.set(3, wCam)
+cap.set(4, hCam)
 # Load hand tracking Module
 detector = htm.handDetector()
 
@@ -68,12 +90,28 @@ while True:
                 # Index finger location - new index finger location
                 if len(IndexFinger)>0:
                     movementX, movementY = IndexFinger[0] - x2, IndexFinger[1] - y2
-                    # print(movementX, movementY)
 
+                    # print(movementX, movementY)
+                    x5 = np.interp(x1, (frameR, wCam - frameR), (0,wScr))
+                    y5 = np.interp(y1, (frameR, hCam - frameR), (0,hScr))
+                    
+
+                    # Smoothen Values:
+                    clocX = movementX / smoothening
+                    clocY = movementY / smoothening
+                    print(x1)
+                    print(x5)
+                    print(plocX)
+                    print(clocX, clocY)
+                    
+                    # Move the cursor
                     try:
-                        pyautogui.move((movementX * 3), (movementY * -3))
+                        pyautogui.move(clocX, clocY)
                     except pyautogui.FailSafeException as e:
                         print(f"Fail-safe triggered: {e}")
+                    plocX,plocY = clocX, clocY
+                    
+                    
             
             # # if the length thumb and index was less than 40 show a green circle
             # if length_thumb_index < 40:
