@@ -26,7 +26,6 @@ smoothening = 7
 plocX, plocY = 0, 0
 clocX, clocY = 0, 0
 wScr, hScr = pyautogui.size()
-print(wScr, hScr)
 
 # Take the video
 cap = cv2.VideoCapture(0)
@@ -82,36 +81,39 @@ while True:
 
         # Get the position of the mouse
         mouseX, mouseY = pyautogui.position()
-        # print(mouseX, mouseY)
+        # print(mouseX, mouseY)\
+
+        # Convert Location
+        x5 = np.interp(x2, (frameR, wCam - frameR), (0,wScr))
+        y5 = np.interp(y2, (frameR, hCam - frameR), (0,hScr))
+
 
         # if the fingers was up
         if fingersUp:
             if length_index_middle < 10:
                 # Index finger location - new index finger location
                 if len(IndexFinger)>0:
+                    
+                    # # print(movementX, movementY)
+                    
                     movementX, movementY = IndexFinger[0] - x2, IndexFinger[1] - y2
 
-                    # print(movementX, movementY)
-                    x5 = np.interp(x1, (frameR, wCam - frameR), (0,wScr))
-                    y5 = np.interp(y1, (frameR, hCam - frameR), (0,hScr))
-                    
-
-                    # Smoothen Values:
-                    clocX = movementX / smoothening
-                    clocY = movementY / smoothening
-                    print(x1)
-                    print(x5)
-                    print(plocX)
+                    # # Smoothen Values:
+                    clocX = plocX + (x5 - plocX) / smoothening
+                    clocY = plocY + (y5 - plocY) / smoothening
+                    # print(x1)
+                    # print(x5)
+                    # print(plocX)
                     print(clocX, clocY)
                     
                     # Move the cursor
                     try:
-                        pyautogui.move(clocX, clocY)
+                        pyautogui.moveTo(wScr - clocX, clocY)
                     except pyautogui.FailSafeException as e:
                         print(f"Fail-safe triggered: {e}")
-                    plocX,plocY = clocX, clocY
                     
                     
+            
             
             # # if the length thumb and index was less than 40 show a green circle
             # if length_thumb_index < 40:
@@ -137,6 +139,8 @@ while True:
                     print(Mouse_Clicked)
                 except pyautogui.FailSafeException as e:
                         print(f"Fail-safe triggered: {e}")
+        
+        plocX,plocY = x5, y5
 
 
     cTime = time.time()
