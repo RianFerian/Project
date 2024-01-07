@@ -11,11 +11,6 @@ import numpy as np
 # cd /d d:\users\rian.ferian\appdata\local\programs\python\python311 python.exe -m pip install autopy
 # cd /d d:\users\rian.ferian\appdata\local\programs\python\python311 python.exe -m pip install autopy --no-build-isolation
 
-
-
-
-
-
 pTime = 0
 cTime = 0
 
@@ -111,10 +106,7 @@ while True:
                         pyautogui.moveTo(wScr - clocX, clocY)
                     except pyautogui.FailSafeException as e:
                         print(f"Fail-safe triggered: {e}")
-                    
-                    
-            
-            
+                                                    
             # # if the length thumb and index was less than 40 show a green circle
             # if length_thumb_index < 40:
             #     cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED)

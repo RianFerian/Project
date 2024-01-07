@@ -1,23 +1,11 @@
-import numpy as np
-import pyautogui
-
-# Smoothening
-wCam, hCam = 640, 480
-frameR = 100
-smoothening = 7
-plocX, plocY = 0, 0
-clocX, clocY = 0, 0
-wScr, hScr = pyautogui.size()
-
-x1 = 300
-x2 = 330
-x5 = np.interp(x1, (100, 640 - 100), (0,1366))
-x6 = np.interp(x2, (100, 640 - 100), (0,1366))
-
-clocX = (x5 - x6) / smoothening
-
-print(x5, x6, clocX)
-
-
-# Lokasi sebelumnya + (lokasi sekarang - lokasi sebelum)/smoothening
-# 
+import cv2
+cap = cv2.VideoCapture(1)
+# The device number might be 0 or 1 depending on the device and the webcam
+cap.open(0, cv2.CAP_DSHOW)
+while(True):
+    ret, frame = cap.read()
+    cv2.imshow('frame', frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()

@@ -7,9 +7,11 @@ import mediapipe as mp
 
 # Install package
 # cd /d d:\users\rian.ferian\appdata\local\programs\python\python311 python.exe -m pip install mediapipe
+# cd /d d:\Users\rian.ferian\AppData\Local\anaconda4\python.exe -m pip install pip==21.0.1
+
 
 # Take video from camera
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(-1)
 
 # import mediapipe library function
 # Package detect hand palm
