@@ -6774,7 +6774,12 @@ button.close {
   color: black;
 }
 
-.input{
+input{
   color: black;
+  background-color: grey;
+}
+
+input:focus{
+  color: black !important;
   background-color: grey;
 }

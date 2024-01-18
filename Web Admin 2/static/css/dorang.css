@@ -11805,7 +11805,12 @@ body.dark-theme {
   color: black;
 }
 
-.input{
+input{
   color: black;
+  background-color: grey;
+}
+
+input:focus{
+  color: black !important;
   background-color: grey;
 }
