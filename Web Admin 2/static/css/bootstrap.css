@@ -6769,3 +6769,12 @@ button.close {
   position: left;
   float: left;
 }
+
+.dark-text {
+  color: black;
+}
+
+.input{
+  color: black;
+  background-color: grey;
+}

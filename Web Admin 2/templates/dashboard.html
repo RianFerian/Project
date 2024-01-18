@@ -63,7 +63,7 @@
                 <!-- Show database at table -->
                 <table class="table table-striped">
                     <tr>
-                        <th>Serial</th>
+                        <th>Index</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -80,7 +80,7 @@
                         <td>{{row.3}}</td>
                         
                         <td>
-                            <a href="/update/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
+                            <a href="/update/{{row.0}}" class="btn btn-warning btn-xs dark-text" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
                             <a href="/delete/{{row.0}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure?')">Delete</a>
                             
                         </td>
@@ -101,17 +101,17 @@
                                         <div class="form-group">
                                             <label>Name:</label>
                                             <input type="hidden"  name="id" value="{{row.0}}">
-                                            <input type="text" class="form-control" name="name" value="{{row.1}}">
+                                            <input type="text" class="form-control dark-text" name="name" value="{{row.1}}">
                                         </div>
                         
                                         <div class="form-group">
                                             <label>Email:</label>
-                                            <input type="text" class="form-control" name="email" value="{{row.2}}">
+                                            <input type="text" class="form-control dark-text" name="email" value="{{row.2}}">
                                         </div>
                         
                                         <div class="form-group">
                                             <label>Phone:</label>
-                                            <input type="text" class="form-control" name="phone" value="{{row.3}}">
+                                            <input type="text" class="form-control dark-text" name="phone" value="{{row.3}}">
                                         </div>
                         
                                         <div class="form-group">

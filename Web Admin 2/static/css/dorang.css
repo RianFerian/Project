@@ -257,6 +257,7 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  color:black;
 }
 
 button,
@@ -11798,4 +11799,13 @@ body.dark-theme {
 .col-md-12 .h2 {
   text-align: left;
   vertical-align: bottom;
+}
+
+.dark-text {
+  color: black;
+}
+
+.input{
+  color: black;
+  background-color: grey;
 }
